@@ -1,1 +1,9 @@
-Hello NCDevCon from Twitter Bootstrap and FW/1!
+<cfoutput query="rc.messages">
+	<p class="lead">
+		#username# - <small>#dateFormat(messageDateTime, 'long')#</small>
+	</p>
+	<p>
+		#message#
+	</p>
+	<hr />
+</cfoutput>

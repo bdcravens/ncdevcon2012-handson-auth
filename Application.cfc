@@ -57,10 +57,16 @@ component extends="org.corfield.framework" {
 		applicationKey = 'org.corfield.framework'
 	};
 	*/
+
+	variables.framework = {
+		reloadApplicationOnEveryRequest=true
+	}
+
+	this.datasource="ncdevcon";
 	
 	function setupRequest() {
 		// use setupRequest to do initialization per request
-		request.context.startTime = getTickCount();
+		
 	}
 	
 }

@@ -6,9 +6,8 @@ component {
 	}
 	
 	public void function default( rc ) {
-		rc.when = now(); // set when for service argument
-		// queue up a specific service (formatter.longdate) with named result (today)
-		variables.fw.service( 'formatter.longdate', 'today' );
+		
+		variables.fw.service( 'messages.GetMessages', 'messages' );
 	}
 	
 }
