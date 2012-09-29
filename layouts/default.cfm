@@ -48,6 +48,7 @@
               <cfoutput><li><a href="#buildUrl('messages.new')#">Post a new message</a></li></cfoutput>
               <cfif session.userid>
                 <cfoutput><li><a href="#buildUrl('security.logout')#">Logout</a></li></cfoutput>
+                <!--- <cfoutput><li><a href="#buildUrl('user.profile')#">My Profile</a></li></cfoutput> --->
               </cfif>
             </ul>
           </div><!--/.nav-collapse -->

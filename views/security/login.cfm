@@ -28,4 +28,10 @@
 
 	</form>
 
+	<p>
+		<cfoutput>
+		<a href='#buildUrl('security.twitter')#' class="btn btn-info btn-large">Twitter</a>
+		</cfoutput>
+	</p>
+
 </div>

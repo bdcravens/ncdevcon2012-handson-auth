@@ -48,4 +48,25 @@
 		<cfreturn true>
 	</cffunction>
 
+	<cffunction name="GetTwitterUser">
+		<cfargument name="username">
+
+		<cfquery name="getUser">
+			select userid from users 
+			where username='#arguments.username#' 
+			and service='twitter'
+		</cfquery>
+
+		<cfif not getUser.recordCount>
+			<cfquery name="saveTwitterUser" result="saveResult">
+				insert into users (username, service) 
+				values ('#arguments.username#','twitter')
+			</cfquery>
+			<cfset session.userid = saveResult.generatedKey>
+		<cfelse>
+			<cfset session.userid = getUser.userid>
+		</cfif>
+
+	</cffunction>
+
 </cfcomponent>
