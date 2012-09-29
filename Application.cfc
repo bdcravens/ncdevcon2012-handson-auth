@@ -63,9 +63,22 @@ component extends="org.corfield.framework" {
 	}
 
 	this.datasource="ncdevcon";
+	this.sessionEnabled = true;
 	
 	function setupRequest() {
 		// use setupRequest to do initialization per request
+
+		securityOverrideList = "main,security";
+
+		if (!structKeyExists(session,'userId')){
+			session.userId=0;
+		}
+
+		if (!listFindNoCase(securityOverrideList,getSection())) { 
+			// in an area that requires authentication and not logged in
+			controller('security.verify');
+
+		}
 		
 	}
 	
