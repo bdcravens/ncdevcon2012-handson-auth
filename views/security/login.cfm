@@ -31,6 +31,7 @@
 	<p>
 		<cfoutput>
 		<a href='#buildUrl('security.twitter')#' class="btn btn-info btn-large">Twitter</a>
+		<a href='#buildUrl('security.facebook')#' class="btn btn-primary btn-large">Facebook</a>
 		</cfoutput>
 	</p>
 

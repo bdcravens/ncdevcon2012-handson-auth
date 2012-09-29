@@ -69,4 +69,25 @@
 
 	</cffunction>
 
+	<cffunction name="GetFacebookUser">
+		<cfargument name="username">
+
+		<cfquery name="getUser">
+			select userid from users 
+			where username='#arguments.username#' 
+			and service='facebook'
+		</cfquery>
+
+		<cfif not getUser.recordCount>
+			<cfquery name="saveFacebookUser" result="saveResult">
+				insert into users (username, service) 
+				values ('#arguments.username#','twitter')
+			</cfquery>
+			<cfset session.userid = saveResult.generatedKey>
+		<cfelse>
+			<cfset session.userid = getUser.userid>
+		</cfif>
+
+	</cffunction>
+
 </cfcomponent>

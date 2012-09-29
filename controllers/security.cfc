@@ -82,5 +82,55 @@ component {
 	public void function endDoLoginTwitter(rc) {
 		variables.fw.redirect('');
 	}
+
+	public any function facebook(rc) {
+		
+		location('https://www.facebook.com/dialog/oauth?client_id=459365380744568&redirect_uri=#urlEncodedFormat('http://auth.dev:8888/index.cfm?action=security.dofacebooklogin')#&state=#session.sessionid#');
+	}
+
+	public any function dofacebooklogin(rc) {
+		
+		if (isDefined('rc.code')) {
+
+			fbAuth = getFBauth(rc.code);
+
+
+			authVar = listFirst(fbAuth,"&");
+			session.token = listLast(authVar,"=");
+			
+
+			userDetails = getFBuser(session.token);
+			
+			userStruct = deserializeJSON(userDetails);
+
+			variables.fw.service('security.getFacebookUser','loginResult',{username=userStruct.name});
+
+
+			
+
+		}
+		if (isDefined('rc.error')) {
+
+			// handle error
+
+		}
+	}
+
+	public any function endDoFacebookLogin(rc) {
+		variables.fw.redirect('');
+	}
+
+	function getFBAuth(fbCode) {
+		http url="https://graph.facebook.com/oauth/access_token?client_id=459365380744568&redirect_uri=#urlEncodedFormat('http://auth.dev:8888/index.cfm?action=security.dofacebooklogin')#&client_secret=8b06eae28e10a8a8732b87624048b16f&code=#urlEncodedFormat(arguments.fbCode)#";
+		return cfhttp.fileContent;
+	}
+
+	function getFBUser(token) {
+		http url="https://graph.facebook.com/me?access_token=#arguments.token#";
+
+		return cfhttp.fileContent;
+	}
+
+
 	
 }
